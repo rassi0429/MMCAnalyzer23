@@ -54,16 +54,17 @@ app.get('/world/mmc22', async function (req, res) {
 
     const endDate = new Date(Date.UTC(2022, 1, 30, 19, 0, 0))
     const startDate = new Date(Date.UTC(2022, 1, 1, 19, 0, 0))
-    
+
     sorted = sorted.filter(w => {
         const date = new Date(w.firstPublishTime)
+        console.log(date, date <= endDate && startDate <= date)
         if(date <= endDate && startDate <= date) {
             return true
         }
         return false
     } )
 
-    const parsed = data.map(res => addGenre22(formatWorld(res)))
+    const parsed = sorted.map(res => addGenre22(formatWorld(res)))
     res.send(req.query.json ? parsed : j2e(parsed))
 })
 
@@ -74,8 +75,16 @@ app.get('/world/mmc21', async function (req, res) {
     const endDate = new Date(Date.UTC(2021, 8, 33, 19, 0, 0))
     const startDate = new Date(Date.UTC(2021, 8, 1, 19, 0, 0))
 
+    sorted = sorted.filter(w => {
+        const date = new Date(w.firstPublishTime)
+        console.log(date, date <= endDate && startDate <= date)
+        if(date <= endDate && startDate <= date) {
+            return true
+        }
+        return false
+    } )
 
-    const parsed = data.map(res => addGenre22(formatWorld(res)))
+    const parsed = sorted.map(res => addGenre22(formatWorld(res)))
     res.send(req.query.json ? parsed : j2e(parsed))
 })
 
@@ -83,8 +92,19 @@ app.get('/world/mmc20', async function (req, res) {
     const data = mmc20data
     let sorted = _.sortBy(data, "firstPublishTime")
 
+    const endDate = new Date(Date.UTC(2020, 8, 33, 19, 0, 0))
+    const startDate = new Date(Date.UTC(2020, 8, 1, 19, 0, 0))
 
-    const parsed = data.map(res => addGenre20(formatWorld(res)))
+    sorted = sorted.filter(w => {
+        const date = new Date(w.firstPublishTime)
+        console.log(date, date <= endDate && startDate <= date)
+        if(date <= endDate && startDate <= date) {
+            return true
+        }
+        return false
+    } )
+
+    const parsed = sorted.map(res => addGenre20(formatWorld(res)))
     res.send(req.query.json ? parsed : j2e(parsed))
 })
 
