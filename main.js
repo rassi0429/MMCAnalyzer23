@@ -4,7 +4,7 @@ const j2e = require("json2emap")
 const _ = require('lodash');
 const app = express()
 
-const recordUrl = "https://api.neos.com/api/records/search"
+const recordUrl = `https://${process.env.NEOS_API}/api/records/search`
 function body(tags) {
     return { "private": false, "submittedTo": "G-Neos", "recordType": "world", "maxItems": 10, "count": 197, "requiredTags": tags }
 }
